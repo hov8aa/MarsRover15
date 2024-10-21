@@ -1,0 +1,11 @@
+require_relative 'ProblemStatement.txt'
+
+Support multiple rovers at once
+Each rover has an id to distinguish them
+Build against rspec, then add cli, then add api
+
+Let's break down the problem:
+1. What are the ways I could find to support multiple rovers.
+Classes, hashes, arrays, Global Variables, Function Arguments, File-based Storage (JSON/YAML) & Database (SQLite)
+
+I am choosing classes methodolopgy & learning the basics of the same.
