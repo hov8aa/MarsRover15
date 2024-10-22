@@ -3,7 +3,7 @@ require_relative '../marsrover'
 
 RSpec.describe "Validate Rovers & their movements" do
 
-    context "validate if the rover is working" do
+    context "validate if the rover1 is working" do
         it "should test if the rover can move" do
             # Initializing a rover1
             rover = { id: "rover1", x: 0, y: 0, direction: "N" }
@@ -13,8 +13,8 @@ RSpec.describe "Validate Rovers & their movements" do
         end
     end
 
-    context "" do
-        it "" do
+    context "validate if the rover2 is also working for validating basic array " do
+        it "should test if the code works for both rovers as exepcted" do
             # Initializing a rover2
             rover = { id: "rover2", x: 0, y: 0, direction: "N" }
 
@@ -23,4 +23,19 @@ RSpec.describe "Validate Rovers & their movements" do
         end
     end
 
+    context "validate rover sideways movements" do
+        it "should validate if the rover can move left" do
+            rover = { id: "rover1", x: 0, y: 0, direction: "N" }
+            move_left(rover)
+            expect(rover[:direction]).to eq('W')
+        end
+    end
+
+=begin
+    context "validate " do
+        it "" do
+            expect().to eq()
+        end
+    end
+=end
 end
