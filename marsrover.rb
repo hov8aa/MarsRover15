@@ -10,3 +10,27 @@ def move_rover(rover)
     rover[:y] += 1
 end
 
+def turn_left(rover)
+    if rover[:direction] == 'N'
+        rover[:direction] = 'W'
+    elsif rover[:direction] == 'W'
+        rover[:direction] = 'S'
+    elsif rover[:direction] == 'S'
+        rover[:direction] = 'E'
+    elsif rover[:direction] == 'E'
+        rover[:direction] = 'N'
+    end
+end
+
+def turn_right(rover)
+    if rover[:direction] == 'N'
+        rover[:direction] = 'E'
+    elsif rover[:direction] == 'E'
+        rover[:direction] = 'S'
+    elsif rover[:direction] == 'S'
+        rover[:direction] = 'W'
+    elsif rover[:direction] == 'W'
+        rover[:direction] = 'N'
+    end
+end
+

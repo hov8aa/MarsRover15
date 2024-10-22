@@ -26,8 +26,14 @@ RSpec.describe "Validate Rovers & their movements" do
     context "validate rover sideways movements" do
         it "should validate if the rover can move left" do
             rover = { id: "rover1", x: 0, y: 0, direction: "N" }
-            move_left(rover)
+            turn_left(rover)
             expect(rover[:direction]).to eq('W')
+        end
+
+        it "should validate if the rover can move right" do
+            rover = { id: "rover1", x: 0, y: 0, direction: "N" }
+            turn_right(rover)
+            expect(rover[:direction]).to eq('E')
         end
     end
 
