@@ -2,8 +2,8 @@
 rovers = []
 
 # Initializing a rover
-rovers << { id: "rover1", x: 0, y: 0, direction: "N" }
-rovers << { id: "rover2", x: 0, y: 0, direction: "E" }
+rovers << { id: "rover1", x: 0, y: 0, direction: "N", instructions: "LMLMLMLMM"}
+rovers << { id: "rover2", x: 0, y: 0, direction: "E", instructions: "LMLMLMLMM"}
 
 # Function to move a rover 1 step forward & test it's basic functioning
 def move_rover(rover)
@@ -43,5 +43,17 @@ def move_rover_in_all_directions(rover)
         rover[:y] -= 1
     elsif rover[:direction] == 'W'
         rover[:x] -= 1
+    end
+end
+
+def move_rover_anywhere(rover)
+    rover[:instructions].each_char do |char|
+        if char == 'L'
+            turn_left(rover)
+        elsif char == 'R'
+            turn_right(rover)
+        elsif char == 'M'
+            move_rover_in_all_directions(rover)
+        end
     end
 end
