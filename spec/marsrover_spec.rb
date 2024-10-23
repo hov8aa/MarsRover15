@@ -37,6 +37,23 @@ RSpec.describe "Validate Rovers & their movements" do
         end
     end
 
+    context "vaildate if the rover moves as expected in all the directions" do        
+        it "should validate if the rover can move" do
+            rover = { id: "rover1", x: 1, y: 2, direction: "N"}
+            move_rover_in_all_directions(rover)
+            expect(rover).to include(x: 1, y: 3, direction: 'N')
+        end
+    end
+
+=begin
+    context "vaildate if the rover moves as expected in all the directions when there are a series of instructions " do        
+        it "should validate if the rover can move with a series of instructions" do
+            rover = { id: "rover1", x: 1, y: 2, direction: "N", instructions: 'LMLMLMLMM'}
+            move_rover_anywhere(rover)
+            expect(rover[:x,:y,:direction]).to eq(1,3,'N')
+        end
+    end
+
 =begin
     context "validate " do
         it "" do
