@@ -213,5 +213,3 @@ def LetsPlay()
         choice = gets.chomp.to_i
     end
 end
-
-LetsPlay()
