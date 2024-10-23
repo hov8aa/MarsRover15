@@ -57,3 +57,15 @@ def move_rover_anywhere(rover)
         end
     end
 end
+
+
+def move_rover_on_plateau(rover,plateau)
+
+    move_rover_anywhere(rover)
+
+    if rover[:x] <= plateau[:x] && rover[:y] <= plateau[:y] && rover[:x] >=0 && rover[:y] >= 0
+        true
+    else
+        false
+    end 
+end
