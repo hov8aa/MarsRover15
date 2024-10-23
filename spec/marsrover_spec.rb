@@ -50,9 +50,33 @@ RSpec.describe "Validate Rovers & their movements" do
             rover = { id: "rover1", x: 1, y: 2, direction: "N", instructions: 'LMLMLMLMM'}
             move_rover_anywhere(rover)
             expect(rover).to include(x: 1, y: 3, direction: 'N')
+
+            rover = { id: "rover1", x: 3, y: 3, direction: "E", instructions: 'MMRMMRMRRM'}
+            move_rover_anywhere(rover)
+            expect(rover).to include(x: 5, y: 1, direction: 'E')
         end
     end
 
+    context "vaildate if the rover moves within plateau boundaries" do        
+        plateau = {x: 5, y: 5}
+        it "should validate if the rover within plateau boundaries" do
+            rover = { id: "rover1", x: 1, y: 2, direction: "N", instructions: 'LMLMLMLMM'}
+            result = move_rover_on_plateau(rover, plateau)
+            expect(result).to be true
+        end
+
+        it "should validate if the rover within plateau boundaries" do
+            rover = { id: "rover1", x: 3, y: 3, direction: "E", instructions: 'MMRMMRMRRM'}
+            result = move_rover_on_plateau(rover, plateau)
+            expect(result).to be true
+        end
+
+        it "should validate if the rover within plateau boundaries" do
+            rover = { id: "rover1", x: 3, y: 3, direction: "E", instructions: 'MMRMMRMRRMMMMMMMMMMMM'}
+            result = move_rover_on_plateau(rover, plateau)
+            expect(result).to be false
+        end
+    end    
 =begin
     context "validate " do
         it "" do
