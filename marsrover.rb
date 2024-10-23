@@ -34,3 +34,14 @@ def turn_right(rover)
     end
 end
 
+def move_rover_in_all_directions(rover)
+    if rover[:direction] == 'N'
+        rover[:y] += 1
+    elsif rover[:direction] == 'E'
+        rover[:x] += 1
+    elsif rover[:direction] == 'S'
+        rover[:y] -= 1
+    elsif rover[:direction] == 'W'
+        rover[:x] -= 1
+    end
+end
