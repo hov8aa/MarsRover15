@@ -8,3 +8,4 @@ source "https://rubygems.org"
 gem "rspec"       # Testing framework
 gem "sinatra"     # Web framework (if needed)
 gem 'rake'
+gem 'sinatra-contrib'

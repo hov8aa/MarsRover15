@@ -24,55 +24,55 @@ RSpec.describe "Validate Rovers & their movements" do
     end
 
     context "validate rover sideways movements" do
-        it "should validate if the rover can move left" do
-            rover = { id: "rover1", x: 0, y: 0, direction: "N" }
+        it "should validate if the rover can move left", focus: true do
+            rover = { "id" => "rover1", "x" => 0, "y"=> 0, "direction"=> "N" }
             turn_left(rover)
-            expect(rover[:direction]).to eq('W')
+            expect(rover["direction"]).to eq('W')
         end
 
         it "should validate if the rover can move right" do
-            rover = { id: "rover1", x: 0, y: 0, direction: "N" }
+            rover = { "id" => "rover1", "x" => 0, "y" => 0, "direction" => "N" }
             turn_right(rover)
-            expect(rover[:direction]).to eq('E')
+            expect(rover["direction"]).to eq('E')
         end
     end
 
     context "vaildate if the rover moves as expected in all the directions" do        
         it "should validate if the rover can move" do
-            rover = { id: "rover1", x: 1, y: 2, direction: "N"}
+            rover = { "id" => "rover1", "x" => 1, "y" => 2, "direction" => "N"}
             move_rover_in_all_directions(rover)
-            expect(rover).to include(x: 1, y: 3, direction: 'N')
+            expect(rover).to include("x" => 1, "y" => 3, "direction" => 'N')
         end
     end
 
     context "vaildate if the rover moves as expected in all the directions when there are a series of instructions " do        
         it "should validate if the rover can move with a series of instructions" do
-            rover = { id: "rover1", x: 1, y: 2, direction: "N", instructions: 'LMLMLMLMM'}
+            rover = { "id" => "rover1", "x" => 1, "y" => 2, "direction" => "N", "instructions" => 'LMLMLMLMM'}
             move_rover_anywhere(rover)
-            expect(rover).to include(x: 1, y: 3, direction: 'N')
+            expect(rover).to include("x" => 1, "y" => 3, "direction" => 'N')
 
-            rover = { id: "rover1", x: 3, y: 3, direction: "E", instructions: 'MMRMMRMRRM'}
+            rover = { "id" => "rover1", "x" => 3, "y" => 3, "direction" => "E", "instructions" => 'MMRMMRMRRM'}
             move_rover_anywhere(rover)
-            expect(rover).to include(x: 5, y: 1, direction: 'E')
+            expect(rover).to include("x" => 5, "y" => 1, "direction" => 'E')
         end
     end
 
     context "vaildate if the rover moves within plateau boundaries" do        
-        plateau = {x: 5, y: 5}
+        plateau = {"x" => 5, "y" => 5}
         it "should validate if the rover within plateau boundaries" do
-            rover = { id: "rover1", x: 1, y: 2, direction: "N", instructions: 'LMLMLMLMM'}
+            rover = { "id" => "rover1", "x" => 1, "y" => 2, "direction" => "N", "instructions" => 'LMLMLMLMM'}
             result = move_rover_on_plateau(rover, plateau)
             expect(result).to be true
         end
 
         it "should validate if the rover within plateau boundaries" do
-            rover = { id: "rover1", x: 3, y: 3, direction: "E", instructions: 'MMRMMRMRRM'}
+            rover = { "id" => "rover1", "x" => 3, "y" => 3, "direction" => "E", "instructions" => 'MMRMMRMRRM'}
             result = move_rover_on_plateau(rover, plateau)
             expect(result).to be true
         end
 
         it "should validate if the rover within plateau boundaries" do
-            rover = { id: "rover1", x: 3, y: 3, direction: "E", instructions: 'MMRMMRMRRMMMMMMMMMMMM'}
+            rover = { "id" => "rover1", "x" => 3, "y" => 3, "direction" => "E", "instructions" => 'MMRMMRMRRMMMMMMMMMMMM'}
             result = move_rover_on_plateau(rover, plateau)
             expect(result).to be false
         end
