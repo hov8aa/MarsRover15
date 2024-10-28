@@ -64,6 +64,13 @@ end
 post '/move_rover_on_plateau/:instructions' do
     request_payload = JSON.parse(request.body.read)
 
-    result = move_rover_on_plateau(request_payload)
+    plateau["x"] = request_payload["plateau_x"]
+    plateau["y"] = request_payload["plateau_y"]
+
+    rover["rover_x"] = request_payload["rover_x"]
+    rover["rover_y"] = request_payload["rover_y"]
+    rover["direction"] = request_payload["direction"]
+    rover["instructions"] = request_payload["instructions"]
+    result = move_rover_on_plateau(rover,plateau)
     json(result)
 end
