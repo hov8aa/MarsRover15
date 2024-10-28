@@ -71,6 +71,12 @@ post '/move_rover_on_plateau/:instructions' do
     rover["rover_y"] = request_payload["rover_y"]
     rover["direction"] = request_payload["direction"]
     rover["instructions"] = request_payload["instructions"]
-    result = move_rover_on_plateau(rover,plateau)
-    json(result)
+
+    begin
+        result = move_rover_on_plateau(rover,plateau)
+        json(result)
+    rescue StandardError => e
+        status 500
+        json(error: e.message)
+    end
 end
