@@ -60,17 +60,15 @@ post '/move_rover_anywhere/:instructions' do
     json(result)
 end
 
-#Test this function using http://localhost:4567/move_rover_on_plateau/LMLMLMLMM
-post '/move_rover_on_plateau/:instructions' do
+#Test this function using http://localhost:4567/move_rover_on_plateau/rover
+post '/move_rover_on_plateau/:rover' do
     request_payload = JSON.parse(request.body.read)
 
-    plateau["x"] = request_payload["plateau_x"]
-    plateau["y"] = request_payload["plateau_y"]
+    plateau = request_payload.keys
+    rover = request_payload["plateau"]["rover"]
 
-    rover["rover_x"] = request_payload["rover_x"]
-    rover["rover_y"] = request_payload["rover_y"]
-    rover["direction"] = request_payload["direction"]
-    rover["instructions"] = request_payload["instructions"]
+#    result = move_rover_on_plateau(rover,plateau)
+#    json(result)
 
     begin
         result = move_rover_on_plateau(rover,plateau)

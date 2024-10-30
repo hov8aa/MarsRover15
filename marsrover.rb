@@ -1,3 +1,7 @@
+require 'json'
+require 'sinatra'
+require 'sinatra/json'
+
 # Defining the array to hold rovers
 rovers = []
 
@@ -60,11 +64,12 @@ def move_rover_anywhere(rover)
             move_rover_in_all_directions(rover)
         end
     end
-    rover
+    return rover
 end
 
 def move_rover_on_plateau(rover,plateau)
 
+    rover["x"].inspect
     move_rover_anywhere(rover)
 
     if rover["x"] <= plateau["x"] && rover["y"] <= plateau["y"] && rover["x"] >=0 && rover["y"] >= 0
@@ -72,6 +77,14 @@ def move_rover_on_plateau(rover,plateau)
     else
         false
     end 
+end
+
+def request_payload(payload)
+    puts "hello world"
+    payload.inspect
+    message = JSON.parse(payload)
+    puts "#{message["x"]}"
+    return message
 end
 
 # UI Layer
