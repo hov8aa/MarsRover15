@@ -78,34 +78,6 @@ RSpec.describe "Validate Rovers & their movements" do
         end
     end    
 
-    context "testing json objects" do
-        it "should return same types after parsing?" do
-
-            plateau = {
-                "x" => "5",
-                "y" => "5",
-                "rover" => {
-                    "rover_id" => "rover1",
-                    "x" => "3",
-                    "y" => "2",
-                    "direction" => "N",
-                    "instructions" => "LMLMLMLMM"
-                }
-            }
-
-            expect(request_payload(plateau)).to eq(
-                                                "x" => "5",
-                                                "y" => "5",
-                                                "rover" => {
-                                                    "rover_id" => "rover1",
-                                                    "x" => "3",
-                                                    "y" => "2",
-                                                    "direction" => "N",
-                                                    "instructions" => "LMLMLMLMM"
-                                                }
-                                        )
-        end
-    end
 =begin
     context "validate " do
         it "" do

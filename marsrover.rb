@@ -79,14 +79,6 @@ def move_rover_on_plateau(rover,plateau)
     end 
 end
 
-def request_payload(payload)
-    puts "hello world"
-    payload.inspect
-    message = JSON.parse(payload)
-    puts "#{message["x"]}"
-    return message
-end
-
 # UI Layer
 def ui_turn_left()
     puts "Let's turn the rover to LEFT, hit enter to continue"

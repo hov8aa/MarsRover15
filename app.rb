@@ -62,13 +62,17 @@ end
 
 #Test this function using http://localhost:4567/move_rover_on_plateau/rover
 post '/move_rover_on_plateau/:rover' do
+
     request_payload = JSON.parse(request.body.read)
 
-    plateau = request_payload.keys
+    plateau = request_payload["plateau"]
     rover = request_payload["plateau"]["rover"]
 
 #    result = move_rover_on_plateau(rover,plateau)
 #    json(result)
+
+    puts rover.inspect
+    puts plateau.inspect
 
     begin
         result = move_rover_on_plateau(rover,plateau)
