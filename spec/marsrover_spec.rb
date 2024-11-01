@@ -2,6 +2,12 @@ require 'rspec'
 require_relative '../marsrover'
 
 RSpec.describe "Validate Rovers & their movements" do
+    context "validate rover creation" do
+        it "should validate if the rover gets created" do
+            plateau = {x: 25, y: 25}
+            expect(create_rover(plateau)).to be true
+        end
+    end
 
     context "validate if the rover1 is working" do
         it "should test if the rover can move" do

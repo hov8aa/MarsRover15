@@ -11,6 +11,24 @@ before do
     content_type 'application/json'
 end
 
+#Test this function using http://localhost:4567/plateau
+post '/plateau' do
+    request_payload = JSON.parse(request.body.read)
+ 
+    begin
+        result = create_rover(request_payload)
+        json(result)
+        #how to respond with a success message?
+
+    rescue StandardError => e
+        #How to understand, which error has occurred?
+        status 500
+        json(error: e.message)
+    end
+end
+
+
+
 #Test this function using http://localhost:4567/move_rover/N
 post '/move_rover/:direction' do
     direction = params['direction'].upcase
@@ -47,10 +65,12 @@ end
 post '/move_rover_in_all_directions/:direction' do
     direction = params['direction'].upcase
     request_payload = JSON.parse(request.body.read)
-
     result = move_rover_in_all_directions(request_payload)
+    puts result.inspect
     json(result)
 end
+
+#/plateau/rovers/{roverid}/instructions/M
 
 #Test this function using http://localhost:4567/move_rover_anywhere/LMLMLMLMM
 post '/move_rover_anywhere/:instructions' do
@@ -59,6 +79,16 @@ post '/move_rover_anywhere/:instructions' do
     result = move_rover_anywhere(request_payload)
     json(result)
 end
+
+#API JSON body text for APIs up until this point.
+=begin
+{
+    "x" : 1,
+    "y" : 1,
+    "direction" : "N",
+    "instructions": "LMLMLM"
+}
+=end
 
 #Test this function using http://localhost:4567/move_rover_on_plateau/rover
 post '/move_rover_on_plateau/:rover' do

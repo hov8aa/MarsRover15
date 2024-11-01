@@ -1,0 +1,40 @@
+* Start server
+  ruby app.rb
+* Create plateau
+  * POST /plateau
+    * {
+      "max_x": number,
+      "max_y": number
+    }
+      * Success
+        * 201 CREATED
+
+      * Failure
+        * 422
+        * {
+          "errors": [
+            "error 1",
+            "error 2"
+          ] 
+        }
+* Get plateau
+  * GET /plateau
+    * Success
+      * 200 OK
+      * {
+        "max_x": number,
+        "max_y": number
+      }        
+* Create rover
+  * POST /plateau/rovers
+    * {
+      "x": number,
+      "y": number
+    }
+
+
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+200-205
+400, 401, 402, 403, 422
+500

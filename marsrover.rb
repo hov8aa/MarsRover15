@@ -14,6 +14,12 @@ rovers = []
 #def move_rover(rover, payload)
 #    payload['y'] +=1
 
+def create_rover(payload)
+    plateau = Hash.new
+    plateau = payload
+    return true
+end
+
 def move_rover(rover)
     rover[:y] += 1
 end
