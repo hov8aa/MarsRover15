@@ -11,12 +11,13 @@ before do
     content_type 'application/json'
 end
 
-#Test this function using http://localhost:4567/plateau
-post '/plateau' do
+#Test "Create Plateau" using http://localhost:4567/create_plateau
+#Payload {"x" : 25, "y" : 25}
+post '/create_plateau' do
     request_payload = JSON.parse(request.body.read)
  
     begin
-        result = create_rover(request_payload)
+        result = create_plateau(request_payload)
         json(result)
         #how to respond with a success message?
 
@@ -27,7 +28,30 @@ post '/plateau' do
     end
 end
 
+#Test "Read Plateau" using http://localhost:4567/read_plateau
+get '/read_plateau' do
+    begin
+        result = read_plateau()
+        json(result)
+    rescue StandardError => e
+        status 500
+        json(error: e.message)
+    end
+end
 
+#Test "Create Plateau/Rover" using http://localhost:4567/plateau/rover
+#payload {"x": 1, "y": 2, "direction": "N"}
+post '/plateau/rover' do
+    request_payload = JSON.parse(request.body.read)
+
+    begin
+        result = create_rover(request_payload)
+        json(result)
+    rescue StandardError => e
+        status 500
+        json(error: e.message)
+    end
+end
 
 #Test this function using http://localhost:4567/move_rover/N
 post '/move_rover/:direction' do

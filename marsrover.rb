@@ -2,21 +2,22 @@ require 'json'
 require 'sinatra'
 require 'sinatra/json'
 
-# Defining the array to hold rovers
-rovers = []
+$mars_plateau = {}
 
-# Initializing a rover
-#rovers << { id: "rover1", x: 0, y: 0, direction: "N", instructions: "LMLMLMLMM"}
-#rovers << { id: "rover2", x: 0, y: 0, direction: "E", instructions: "LMLMLMLMM"}
+def create_plateau(request_payload)
+    $mars_plateau = request_payload
+    #puts $mars_plateau.inspect
+    return true
+end
 
-# Function to move a rover 1 step forward & test it's basic functioning
+def read_plateau()
+    #puts $mars_plateau["x"].inspect
+    return $mars_plateau
+end
 
-#def move_rover(rover, payload)
-#    payload['y'] +=1
-
-def create_rover(payload)
-    plateau = Hash.new
-    plateau = payload
+def create_rover(request_payload)
+    $mars_plateau["rover"] = request_payload
+    puts $mars_plateau.inspect
     return true
 end
 

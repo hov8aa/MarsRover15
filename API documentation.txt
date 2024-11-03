@@ -31,6 +31,29 @@
       "x": number,
       "y": number
     }
+    * Success
+        * 201 CREATED
+      * Failure
+        * 422
+        * {
+          "errors": [
+            "error 1",
+            "error 2"
+          ] 
+        }
+* Get rover
+    * GET /plateau/rover
+        * Success
+            * 201 CREATED
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
+
 
 
 
