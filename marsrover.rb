@@ -6,23 +6,25 @@ $mars_plateau = {}
 
 def create_plateau(request_payload)
     $mars_plateau = request_payload
-    #puts $mars_plateau.inspect
     return true
 end
 
 def read_plateau()
-    #puts $mars_plateau["x"].inspect
     return $mars_plateau
 end
 
 def create_rover(request_payload)
     $mars_plateau["rover"] = request_payload
-    puts $mars_plateau.inspect
     return true
 end
 
-def move_rover(rover)
-    rover[:y] += 1
+def get_rover()
+    return $mars_plateau["rover"]
+end
+
+def move_rover()
+    $mars_plateau["rover"]["x"] += 1
+    return $mars_plateau["rover"]
 end
 
 def turn_left(rover)

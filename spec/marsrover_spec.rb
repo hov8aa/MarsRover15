@@ -3,6 +3,11 @@ require_relative '../marsrover'
 
 RSpec.describe "Validate Rovers & their movements" do
     
+    before(:each) do 
+        rover = {x: 0, y: 0, direction: "N" }         
+     end 
+  
+
     context "validate plateau creation" do
         it "should validate if the plateau gets created" do
             plateau = {"x": 25, "y": 25}
@@ -12,18 +17,14 @@ RSpec.describe "Validate Rovers & their movements" do
 
     context "validate rover creation on a plateau" do
         it "should validate if the rover gets created on a plateau" do
-            rover = {x: 1, y: 2, direction: "N"}
+            rover = {id: 1, x: 1, y: 2, direction: "N"}
             expect(create_rover(rover)).to be true
         end
     end
 
     context "validate if the rover1 is working" do
         it "should test if the rover can move" do
-            # Initializing a rover1
-            rover = { id: "rover1", x: 0, y: 0, direction: "N" }
-
-            move_rover(rover)
-            expect(rover[:y]).to eq(1)
+            expect(move_rover()).to be true
         end
     end
 

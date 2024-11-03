@@ -40,7 +40,7 @@ get '/read_plateau' do
 end
 
 #Test "Create Plateau/Rover" using http://localhost:4567/plateau/rover
-#payload {"x": 1, "y": 2, "direction": "N"}
+#payload {"id": 1, "x": 1, "y": 2, "direction": "N"}
 post '/plateau/rover' do
     request_payload = JSON.parse(request.body.read)
 
@@ -53,13 +53,21 @@ post '/plateau/rover' do
     end
 end
 
-#Test this function using http://localhost:4567/move_rover/N
-post '/move_rover/:direction' do
-    direction = params['direction'].upcase
-    request_payload = JSON.parse(request.body.read)
-
+#Test "Get Rover" using http://localhost:4567/get_rover
+get '/get_rover' do
     begin
-        result = move_rover(direction,request_payload)
+        result = get_rover()
+        json(result)
+    rescue StandardError => e
+        status 500
+        json(error: e.message)
+    end
+end
+
+#Test this function using http://localhost:4567/move_rover
+get '/move_rover' do
+    begin
+        result = move_rover()
         json(result)
     rescue StandardError => e
         status 500
