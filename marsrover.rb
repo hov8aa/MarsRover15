@@ -3,6 +3,7 @@ require 'sinatra'
 require 'sinatra/json'
 
 $mars_plateau = {}
+$input = {}
 
 def create_plateau(request_payload)
     $mars_plateau = request_payload
@@ -66,25 +67,24 @@ def move_rover_in_all_directions()
     return $mars_plateau["rover"]
 end
 
-def move_rover_anywhere(rover)
-    rover["instructions"].each_char do |char|
+def move_rover_anywhere(instructions)
+    $input = instructions
+    $input["instructions"].each_char do |char|
         if char == 'L'
-            turn_left(rover)
+            turn_left()
         elsif char == 'R'
-            turn_right(rover)
+            turn_right()
         elsif char == 'M'
-            move_rover_in_all_directions(rover)
+            move_rover_in_all_directions()
         end
     end
-    return rover
+    return $mars_plateau["rover"]
 end
 
-def move_rover_on_plateau(rover,plateau)
+def move_rover_on_plateau(instructions)
+    move_rover_anywhere(instructions)
 
-    rover["x"].inspect
-    move_rover_anywhere(rover)
-
-    if rover["x"] <= plateau["x"] && rover["y"] <= plateau["y"] && rover["x"] >=0 && rover["y"] >= 0
+    if $mars_plateau["rover"]["x"] <= $mars_plateau["x"] && $mars_plateau["rover"]["y"] <= $mars_plateau["y"] && $mars_plateau["rover"]["x"] >=0 && $mars_plateau["rover"]["y"] >= 0
         true
     else
         false

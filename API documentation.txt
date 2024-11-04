@@ -131,7 +131,7 @@
             * SUCCESS CODE?
             {
                 Rover: {
-                    (depending upon exisingt direction of the face)
+                    (depending upon exising direction of the face)
                     "x": +1
                     "y": +1 
                     "direction": "existing direction"
@@ -145,8 +145,45 @@
                 "error 2"
             ] 
             }
+    * Done
+* Move Rover As Per The Instructions
+    * POST
+        instructions = "LMLMLMLMM"
+        * Success
+            * SUCCESS CODE?
+            {
+                Rover: {
+                    (Rover new position depending upon the instruction)
+                }
+            }
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
+    * Done
+* Move Rover As Per The Instructions & validate if it runs only on plateau
+    * POST
+        instructions = "LMLMLMLMM"
+        * Success
+            * SUCCESS CODE?
+            {
+                Rover: {
+                    (Rover new position depending upon the instruction)
+                }
+            }
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
     * In Progress
-
 
 
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status

@@ -95,43 +95,18 @@ end
 
 #/plateau/rovers/{roverid}/instructions/M
 
-#Test this function using http://localhost:4567/move_rover_anywhere/LMLMLMLMM
-post '/move_rover_anywhere/:instructions' do
+#Test this function using http://localhost:4567/move_rover_anywhere
+post '/move_rover_anywhere' do
     request_payload = JSON.parse(request.body.read)
 
     result = move_rover_anywhere(request_payload)
     json(result)
 end
 
-#API JSON body text for APIs up until this point.
-=begin
-{
-    "x" : 1,
-    "y" : 1,
-    "direction" : "N",
-    "instructions": "LMLMLM"
-}
-=end
-
-#Test this function using http://localhost:4567/move_rover_on_plateau/rover
-post '/move_rover_on_plateau/:rover' do
-
+#Test this function using http://localhost:4567/move_rover_on_plateau
+post '/move_rover_on_plateau' do
     request_payload = JSON.parse(request.body.read)
 
-    plateau = request_payload["plateau"]
-    rover = request_payload["plateau"]["rover"]
-
-#    result = move_rover_on_plateau(rover,plateau)
-#    json(result)
-
-    puts rover.inspect
-    puts plateau.inspect
-
-    begin
-        result = move_rover_on_plateau(rover,plateau)
-        json(result)
-    rescue StandardError => e
-        status 500
-        json(error: e.message)
-    end
+    result = move_rover_on_plateau(request_payload)
+    json(result)
 end
