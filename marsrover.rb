@@ -27,40 +27,43 @@ def move_rover()
     return $mars_plateau["rover"]
 end
 
-def turn_left(rover)
-    if rover["direction"] == 'N'
-        rover["direction"] = 'W'
-    elsif rover["direction"] == 'W'
-        rover["direction"] = 'S'
-    elsif rover["direction"] == 'S'
-        rover["direction"] = 'E'
-    elsif rover["direction"] == 'E'
-        rover["direction"] = 'N'
+def turn_left()
+    if $mars_plateau["rover"]["direction"] == 'N'
+        $mars_plateau["rover"]["direction"] = 'W'
+    elsif $mars_plateau["rover"]["direction"] == 'W'
+        $mars_plateau["rover"]["direction"] = 'S'
+    elsif $mars_plateau["rover"]["direction"] == 'S'
+        $mars_plateau["rover"]["direction"] = 'E'
+    elsif $mars_plateau["rover"]["direction"] == 'E'
+        $mars_plateau["rover"]["direction"] = 'N'
     end
+    return $mars_plateau["rover"]
 end
 
-def turn_right(rover)
-    if rover["direction"] == 'N'
-        rover["direction"] = 'E'
-    elsif rover["direction"] == 'E'
-        rover["direction"] = 'S'
-    elsif rover["direction"] == 'S'
-        rover["direction"] = 'W'
-    elsif rover["direction"] == 'W'
-        rover["direction"] = 'N'
+def turn_right()
+    if $mars_plateau["rover"]["direction"] == 'N'
+        $mars_plateau["rover"]["direction"] = 'E'
+    elsif $mars_plateau["rover"]["direction"] == 'E'
+        $mars_plateau["rover"]["direction"] = 'S'
+    elsif $mars_plateau["rover"]["direction"] == 'S'
+        $mars_plateau["rover"]["direction"] = 'W'
+    elsif $mars_plateau["rover"]["direction"] == 'W'
+        $mars_plateau["rover"]["direction"] = 'N'
     end
+    return $mars_plateau["rover"]
 end
 
-def move_rover_in_all_directions(rover)
-    if rover["direction"] == 'N'
-        rover["y"] += 1
-    elsif rover["direction"] == 'E'
-        rover["x"] += 1
-    elsif rover["direction"] == 'S'
-        rover["y"] -= 1
-    elsif rover["direction"] == 'W'
-        rover["x"] -= 1
+def move_rover_in_all_directions()
+    if $mars_plateau["rover"]["direction"] == 'N'
+        $mars_plateau["rover"]["y"] += 1
+    elsif $mars_plateau["rover"]["direction"] == 'E'
+        $mars_plateau["rover"]["x"] += 1
+    elsif $mars_plateau["rover"]["direction"] == 'S'
+        $mars_plateau["rover"]["y"] -= 1
+    elsif $mars_plateau["rover"]["direction"] == 'W'
+        $mars_plateau["rover"]["x"] -= 1
     end
+    return $mars_plateau["rover"]
 end
 
 def move_rover_anywhere(rover)

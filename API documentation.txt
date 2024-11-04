@@ -1,7 +1,7 @@
 * Start server
   ruby app.rb
-* Create plateau
-  * POST /create_plateau
+* Create Plateau
+    * POST /create_plateau
     * {
       "max_x": number,
       "max_y": number
@@ -17,16 +17,16 @@
             "error 2"
           ] 
         }
-* Get plateau
-  * GET /create_plateau
+* Get Plateau
+    * GET /create_plateau
     * Success
       * 200 OK
       * {
         "max_x": number,
         "max_y": number
         }
-* Create rover
-  * POST /plateau/rovers
+* Create Rover
+    * POST /plateau/rovers
     * {
       "id": number,
       "x": number,
@@ -42,7 +42,7 @@
             "error 2"
           ] 
           }
-* Get rover
+* Get Rover
     * GET /plateau/rover
         * Success
             * 201 CREATED
@@ -54,14 +54,14 @@
                 "error 2"
             ] 
             }
-    * Success
-      * 200 OK
-        * {
-            "id": number,
-            "x": number,
-            "y": number
-            }
-    * Failure
+        * Success
+        * 200 OK
+            * {
+                "id": number,
+                "x": number,
+                "y": number
+                }
+        * Failure
         * 422
         * {
           "errors": [
@@ -69,7 +69,83 @@
             "error 2"
           ] 
           }
-        
+* Move Rover One Step Forward (only in East direction
+    * GET
+        * Success
+            * SUCCESS CODE?
+            {
+                Rover: { (only in east direction)
+                    "x": +1
+                    "y": +1 
+                    "direction": "existing direction"
+                }
+            }
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
+    * Done
+* Turn Rover Left
+    * GET
+        * Success
+            * SUCCESS CODE?
+            {
+                Rover: {
+                    direction: "new left direction"
+                }
+            }
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
+    * Done
+* Turn  Rover Right
+    * GET
+        * Success
+            * SUCCESS CODE?
+            {
+                Rover: {
+                    direction: "new right direction"
+                }
+            }
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
+    * Done
+* Move Rover One Step Forward in any direction
+    * GET
+        * Success
+            * SUCCESS CODE?
+            {
+                Rover: {
+                    (depending upon exisingt direction of the face)
+                    "x": +1
+                    "y": +1 
+                    "direction": "existing direction"
+                }
+            }
+        * Failure
+            * 422
+            * {
+            "errors": [
+                "error 1",
+                "error 2"
+            ] 
+            }
+    * In Progress
 
 
 

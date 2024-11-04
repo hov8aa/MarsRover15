@@ -75,30 +75,21 @@ get '/move_rover' do
     end
 end
 
-#Test this function using http://localhost:4567/turn_left/N
-post '/turn_left/:direction' do
-    direction = params['direction'].upcase
-    request_payload = JSON.parse(request.body.read)
-
-    result = turn_left(request_payload)
+#Test this function using http://localhost:4567/turn_left
+get '/turn_left' do
+    result = turn_left()
     json(result)
 end
 
-#Test this function using http://localhost:4567/turn_right/N
-post '/turn_right/:direction' do
-    direction = params['direction'].upcase
-    request_payload = JSON.parse(request.body.read)
-
-    result = turn_right(request_payload)
+#Test this function using http://localhost:4567/turn_right
+get '/turn_right' do
+    result = turn_right()
     json(result)
 end
 
-#Test this function using http://localhost:4567/move_rover_in_all_directions/N
-post '/move_rover_in_all_directions/:direction' do
-    direction = params['direction'].upcase
-    request_payload = JSON.parse(request.body.read)
-    result = move_rover_in_all_directions(request_payload)
-    puts result.inspect
+#Test this function using http://localhost:4567/move_rover_in_all_directions
+get '/move_rover_in_all_directions' do
+    result = move_rover_in_all_directions()
     json(result)
 end
 

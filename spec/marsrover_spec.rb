@@ -4,7 +4,15 @@ require_relative '../marsrover'
 RSpec.describe "Validate Rovers & their movements" do
     
     before(:each) do 
-        rover = {x: 0, y: 0, direction: "N" }         
+        plateau = {
+            x: 25, 
+            y: 25,
+            rover: {
+                x: 0, 
+                y: 0, 
+                direction: "N" 
+            }
+        }
      end 
   
 
@@ -28,35 +36,27 @@ RSpec.describe "Validate Rovers & their movements" do
         end
     end
 
+=begin #Will Update & Activate this spec when we add a functionality to add & manage multiple rovers
     context "validate if the rover2 is also working for validating basic array " do
         it "should test if the code works for both rovers as exepcted" do
-            # Initializing a rover2
-            rover = { id: "rover2", x: 0, y: 0, direction: "N" }
-
-            move_rover(rover)
-            expect(rover[:y]).to eq(1)
+            expect(move_rover()).to be true
         end
     end
+=end
 
     context "validate rover sideways movements" do
-        it "should validate if the rover can move left", focus: true do
-            rover = { "id" => "rover1", "x" => 0, "y"=> 0, "direction"=> "N" }
-            turn_left(rover)
-            expect(rover["direction"]).to eq('W')
+        it "should validate if the rover can move left" do
+            expect(turn_left()).to be true
         end
 
         it "should validate if the rover can move right" do
-            rover = { "id" => "rover1", "x" => 0, "y" => 0, "direction" => "N" }
-            turn_right(rover)
-            expect(rover["direction"]).to eq('E')
+            expect(turn_right()).to be true
         end
     end
 
     context "vaildate if the rover moves as expected in all the directions" do        
-        it "should validate if the rover can move" do
-            rover = { "id" => "rover1", "x" => 1, "y" => 2, "direction" => "N"}
-            move_rover_in_all_directions(rover)
-            expect(rover).to include("x" => 1, "y" => 3, "direction" => 'N')
+        it "should validate if the rover can move in all the directions" do
+            expect(move_rover_in_all_directions()).to include("x" => 1, "y" => 3, "direction" => 'N')
         end
     end
 
