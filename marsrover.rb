@@ -2,7 +2,10 @@ require 'json'
 require 'sinatra'
 require 'sinatra/json'
 
-$mars_plateau = {}
+$mars_plateau = { 
+                    "rover":{} 
+                }
+
 $input = {}
 
 def create_plateau(request_payload)
@@ -24,8 +27,7 @@ def get_rover()
 end
 
 def move_rover()
-    $mars_plateau["rover"]["x"] += 1
-    return $mars_plateau["rover"]
+   $mars_plateau["rover"]["x"] += 1
 end
 
 def turn_left()
