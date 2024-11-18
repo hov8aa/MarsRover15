@@ -5,12 +5,20 @@ require 'sinatra/json'
 $mars_plateau = { 
                     "rover":{} 
                 }
-
 $input = {}
 
 def create_plateau(request_payload)
     $mars_plateau = request_payload
     return true
+end
+
+def plateau()
+#    $plateau = {
+#        "table_rows": $mars_plateau["x"],
+#        "table_cols": $mars_plateau["y"]
+#            }
+#    $plateau = $mars_plateau
+    return $mars_plateau
 end
 
 def read_plateau()

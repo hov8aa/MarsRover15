@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rover Control Center</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4a261; /* Mars-themed color */
+            color: #333;
+            padding: 20px;
+        }
+
+        #control-sections {
+            display: flex;
+            gap: 20px;
+        }
+
+        .control-panel {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 5px;
+            width: 120px; /* Consistent label width */
+        }
+
+        input, select, button {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="number"], select, input[type="text"] {
+            width: calc(100% - 140px); /* Adjusting for consistent spacing */
+        }
+
+        button {
+            background-color: #e76f51; /* Mars-themed button color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+        }
+
+        button:hover {
+            background-color: #d84315;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        #display-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        #rover-controls {
+            margin-top: 10px;
+        }
+
+        #rover-controls button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mars Rover Control Center</h1>
+
+    <div id="control-sections">
+        <!-- Create Plateau Form -->
+        <div class="control-panel">
+            <h3>Create Plateau</h3>
+            <form id="create-plateau-form">
+                <label for="plateau-x">X Coordinate:</label>
+                <input type="number" id="plateau-x" name="plateau-x" min="1" required><br>
+                <label for="plateau-y">Y Coordinate:</label>
+                <input type="number" id="plateau-y" name="plateau-y" min="1" required><br>
+                <button type="button" id="create-plateau-btn">Create Plateau</button>
+            </form>
+        </div>
+
+        <!-- Create Rover Form -->
+        <div class="control-panel">
+            <h3>Create Rover</h3>
+            <form id="create-rover-form">
+                <label for="rover-x">Rover X Position:</label>
+                <input type="number" id="rover-x" name="rover-x" min="0" required><br>
+                <label for="rover-y">Rover Y Position:</label>
+                <input type="number" id="rover-y" name="rover-y" min="0" required><br>
+                <label for="rover-direction">Direction:</label>
+                <select id="rover-direction" name="rover-direction" required>
+                    <option value="N">North</option>
+                    <option value="E">East</option>
+                    <option value="S">South</option>
+                    <option value="W">West</option>
+                </select><br>
+                <button type="button" id="create-rover-btn">Create Rover</button>
+            </form>
+
+            <!-- Rover Control Buttons -->
+            <div id="rover-controls">
+                <h4>Rover Controls</h4>
+                <button type="button" id="move-forward-btn">Move Forward (M)</button>
+                <button type="button" id="turn-left-btn">Turn Left (L)</button>
+                <button type="button" id="turn-right-btn">Turn Right (R)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Display Section -->
+    <div id="display-section">
+        <h3>Plateau & Rover Details</h3>
+        <div id="plateau-details">No plateau created.</div>
+        <div id="rover-details">No rover created.</div>
+    </div>
+
+    <script>
+        // Create Plateau button functionality
+        document.getElementById('create-plateau-btn').addEventListener('click', function() {
+            const x = document.getElementById('plateau-x').value;
+            const y = document.getElementById('plateau-y').value;
+
+            fetch('/create_plateau', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ plateau_x: x, plateau_y: y })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('plateau-details').innerText = `Plateau created with dimensions: ${data.x} x ${data.y}`;
+            })
+            .catch(error => console.error('Error creating plateau:', error));
+        });
+
+        // Create Rover button functionality
+        document.getElementById('create-rover-btn').addEventListener('click', function() {
+            const x = document.getElementById('rover-x').value;
+            const y = document.getElementById('rover-y').value;
+            const direction = document.getElementById('rover-direction').value;
+
+            fetch('/plateau/rover', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ rover_id: 'auto-generated', position_x: x, position_y: y, direction: direction })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('rover-details').innerText = `Rover created at (${data.x}, ${data.y}) facing ${data.direction}`;
+            })
+            .catch(error => console.error('Error creating rover:', error));
+        });
+
+        // Move Rover Controls
+        document.getElementById('move-forward-btn').addEventListener('click', function() {
+            fetch('/plateau/rover/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'M' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('rover-details').innerText = `Rover moved to (${data.x}, ${data.y}) facing ${data.direction}`;
+            })
+            .catch(error => console.error('Error moving rover forward:', error));
+        });
+
+        document.getElementById('turn-left-btn').addEventListener('click', function() {
+            fetch('/plateau/rover/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'L' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('rover-details').innerText = `Rover turned left, now facing ${data.direction}`;
+            })
+            .catch(error => console.error('Error turning rover left:', error));
+        });
+
+        document.getElementById('turn-right-btn').addEventListener('click', function() {
+            fetch('/plateau/rover/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'R' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('rover-details').innerText = `Rover turned right, now facing ${data.direction}`;
+            })
+            .catch(error => console.error('Error turning rover right:', error));
+        });
+    </script>
+</body>
+</html>

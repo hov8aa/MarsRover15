@@ -4,7 +4,8 @@ require 'sinatra/json'
 require_relative 'marsrover.rb' 
 
 get '/' do
-  'Sinatra app is running!'
+    content_type :html
+    erb :index
 end
 
 before do
@@ -28,11 +29,18 @@ post '/create_plateau' do
     end
 end
 
+#Display the playteau using http://localhost:4567/plateau
+get '/plateau' do
+    result = plateau()
+    erb(:index)
+end
+
 #Test "Read Plateau" using http://localhost:4567/read_plateau
 get '/read_plateau' do
     begin
         result = read_plateau()
         json(result)
+        #puts "#{result}"
     rescue StandardError => e
         status 500
         json(error: e.message)
