@@ -32,7 +32,7 @@ end
 #Display the playteau using http://localhost:4567/plateau
 get '/plateau' do
     result = plateau()
-    erb(:index)
+    json(result)
 end
 
 #Test "Read Plateau" using http://localhost:4567/read_plateau
