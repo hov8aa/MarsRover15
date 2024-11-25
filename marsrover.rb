@@ -18,15 +18,6 @@ def plateau()
 #        "table_cols": $mars_plateau["y"]
 #            }
 #    $plateau = $mars_plateau
-    "<table border='1' style='margin: auto; border-collapse: collapse;'>"
-    $mars_plateau["x"].times do
-        "<tr>"
-            $mars_plateau["y"].times do
-                "<td style='padding: 10px;'></td>"
-            end 
-        "</tr>"
-    end
-    "</table>"
     #return $mars_plateau
 end
 

@@ -31,8 +31,18 @@ end
 
 #Display the playteau using http://localhost:4567/plateau
 get '/plateau' do
-    result = plateau()
-    json(result)
+    content_type :html
+    var1 = '$mars_plateau["x"].times {'
+    var2 = '}
+    "<html>
+    <table border='1'>
+        #{var1}
+        <tr>
+            <td style='padding: 10px;'></td>
+        </tr>
+        #{var2}
+    </table>
+    </html>"
 end
 
 #Test "Read Plateau" using http://localhost:4567/read_plateau
