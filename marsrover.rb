@@ -13,12 +13,7 @@ def create_plateau(request_payload)
 end
 
 def plateau()
-#    $plateau = {
-#        "table_rows": $mars_plateau["x"],
-#        "table_cols": $mars_plateau["y"]
-#            }
-#    $plateau = $mars_plateau
-    #return $mars_plateau
+    Array.new($mars_plateau["x"].times {"<td>hello</td>"})
 end
 
 def read_plateau()

@@ -32,16 +32,13 @@ end
 #Display the playteau using http://localhost:4567/plateau
 get '/plateau' do
     content_type :html
-    var1 = '$mars_plateau["x"].times {'
-    var2 = '}
+    #var1 = plateau()
+    #var1 = Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>oo</td>"}
+    var2 = Array.new($mars_plateau["y"]) {|j|"<tr>#{Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>oo</td>"}.join}</tr>"}
     "<html>
-    <table border='1'>
-        #{var1}
-        <tr>
-            <td style='padding: 10px;'></td>
-        </tr>
-        #{var2}
-    </table>
+        <table border='1'>
+                #{var2.join}
+        </table>
     </html>"
 end
 
