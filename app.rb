@@ -35,10 +35,14 @@ get '/plateau' do
     #var1 = plateau()
     #var1 = Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>oo</td>"}
     var2 = Array.new($mars_plateau["y"]) {|j|"<tr>#{Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>oo</td>"}.join}</tr>"}
+    var3 = move_rover_in_all_directions
     "<html>
         <table border='1'>
                 #{var2.join}
         </table>
+
+        <input type='button' onclick='/move_rover_in_all_directions' value='Move Rover' id='move'>
+
     </html>"
 end
 
