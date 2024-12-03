@@ -32,17 +32,23 @@ end
 #Display the playteau using http://localhost:4567/plateau
 get '/plateau' do
     content_type :html
-    #var1 = plateau()
-    #var1 = Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>oo</td>"}
-    var2 = Array.new($mars_plateau["y"]) {|j|"<tr>#{Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>oo</td>"}.join}</tr>"}
-    var3 = move_rover_in_all_directions
+    var2 = Array.new($mars_plateau["y"]) {|j|"<tr>#{Array.new($mars_plateau["x"]) {|i| i==$mars_plateau["rover"]["x"] && j==$mars_plateau["rover"]["y"] ? "<td>ROVER</td>" : "<td>OOOO</td>"}.join}</tr>"}
     "<html>
-        <table border='1'>
+    <head>
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    </head>
+    <body>
+
+        <table border='1' id='plateau'>
                 #{var2.join}
         </table>
 
-        <input type='button' onclick='/move_rover_in_all_directions' value='Move Rover' id='move'>
-
+        <div align='center'>
+        <button><a href='/turn_left'>Turn Left</a></button>
+        <button><a href='/turn_right'>Turn Right</a></button>
+        <button><a href='/move_rover_in_all_directions'>Move Forward</a></button>
+        </div>
+    </body>
     </html>"
 end
 
@@ -98,18 +104,21 @@ end
 get '/turn_left' do
     result = turn_left()
     json(result)
+    redirect '/plateau'
 end
 
 #Test this function using http://localhost:4567/turn_right
 get '/turn_right' do
     result = turn_right()
     json(result)
+    redirect '/plateau'
 end
 
 #Test this function using http://localhost:4567/move_rover_in_all_directions
 get '/move_rover_in_all_directions' do
     result = move_rover_in_all_directions()
     json(result)
+    redirect '/plateau'
 end
 
 #/plateau/rovers/{roverid}/instructions/M
